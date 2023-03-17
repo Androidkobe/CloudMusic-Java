@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_drawer"
+    app:startDestination="@id/drawerFragment">
+
+    <fragment
+        android:id="@+id/drawerFragment"
+        android:name="com.netease.music.ui.page.drawer.DrawerFragment"
+        android:label="fragment_drawer"
+        tools:layout="@layout/fragment_drawer">
+
+        <action
+            android:id="@+id/action_drawerFragment_to_messageTabActivity"
+            app:destination="@id/messageTabActivity"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+        <action
+            android:id="@+id/action_drawerFragment_to_cloudActivity"
+            app:destination="@id/cloudActivity"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+
+        <action
+            android:id="@+id/action_drawerFragment_to_loginActivity"
+            app:destination="@id/loginActivity"
+            app:enterAnim="@anim/h_fragment_enter"
+            app:exitAnim="@anim/h_fragment_exit"
+            app:popEnterAnim="@anim/h_fragment_pop_enter"
+            app:popExitAnim="@anim/h_fragment_pop_exit" />
+    </fragment>
+
+    <activity
+        android:id="@+id/messageTabActivity"
+        android:name="com.netease.music.ui.page.drawer.MessageTabActivity"
+        android:label="messageActivity"
+        tools:layout="@layout/delegate_message_tab" />
+
+    <activity
+        android:id="@+id/cloudActivity"
+        android:name="com.netease.music.ui.page.drawer.CloudMusicActivity"
+        android:label="cloudActivity"
+        tools:layout="@layout/delegate_user_cloud" />
+
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.netease.music.ui.page.login.PhoneLoginActivity"
+        android:label="phoneLoginActivity"
+        tools:layout="@layout/delegate_phone_login" />
+</navigation>

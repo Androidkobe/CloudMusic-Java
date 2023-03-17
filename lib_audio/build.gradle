@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation this.rootProject.depsLibs.xpopup
+    implementation this.rootProject.depsLibs.gson
+
+    //占位主工程android原生库
+    compileOnly this.rootProject.depsLibs.BaseRecyclerViewAdapterHelper
+    //占位主工程的eventbus库
+    compileOnly this.rootProject.depsLibs.eventbus
+    //占位主工程的rxjava库
+    compileOnly this.rootProject.depsLibs.rxjava
+    compileOnly this.rootProject.depsLibs.rxandroid
+    //Room
+    implementation this.rootProject.depsLibs.room
+    //占位主工程自己源码库
+    compileOnly project(':lib_image_loader')
+    compileOnly project(':lib_common_ui')
+    compileOnly project(':lib_api')
+    compileOnly project(':lib_network')
+    compileOnly project(':architecture')
+}
+

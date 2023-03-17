@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.netease.music.ui.state.LoginViewModel" />
+
+        <variable
+            name="click"
+            type="com.netease.music.ui.page.login.LoginActivity.ClickProxy" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_red_dark">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <com.netease.lib_common_ui.SpreadView
+                android:id="@+id/spreadView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:spread_delay_milliseconds="150"
+                app:spread_distance="5"
+                app:spread_max_radius="90"
+                app:spread_radius="100"
+                app:spread_center_color="@color/red"
+                app:spread_spread_color="@color/white" />
+
+            <com.netease.lib_common_ui.circle_image_view.CircleImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_launcher" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_login_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="165dp"
+            android:background="@drawable/bg_mobile_loggin"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            onClickWithDebouncing="@{() -> click.phoneLogin()}"
+            android:text="手机号登录"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_login_experience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="110dp"
+            android:background="@drawable/bg_home_experience"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            onClickWithDebouncing="@{() -> click.experience()}"
+            android:text="立即体验"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_agree_rule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#cdffffff"
+                android:scaleX="0.63"
+                android:scaleY="0.63"
+                android:paddingBottom="3dp"
+                android:paddingRight="-3dp"
+                android:checked="@={vm.argeeRule}" />
+
+            <TextView
+                android:id="@+id/tv_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:paddingTop="1dp"
+                android:paddingBottom="1dp"
+                android:gravity="center"
+                android:text="同意《用户协议》和《隐私政策》《儿童隐私政策》"
+                android:textColor="@android:color/white"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

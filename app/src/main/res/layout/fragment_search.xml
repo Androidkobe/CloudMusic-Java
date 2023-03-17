@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="com.netease.music.ui.page.search.SearchActivity.ClickProxy" />
+
+        <variable
+            name="listener"
+            type="android.widget.TextView.OnEditorActionListener" />
+
+        <variable
+            name="vm"
+            type="com.netease.music.ui.state.SearchViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.chad.library.adapter.base.BaseQuickAdapter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/img_suggest_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                onClickWithDebouncing="@{() -> click.back()}"
+                android:src="@drawable/ic_left_arrow_black" />
+
+            <EditText
+                android:id="@+id/tv_search_keyword"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="7"
+                android:background="@null"
+                android:gravity="bottom"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="@={vm.searchKeyword}"
+                onEditorActionListener="@{listener}"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/img_search_artist"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp"
+                onClickWithDebouncing="@{() -> click.navToArtist()}"
+                android:src="@drawable/ic_singer" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginRight="55dp"
+            android:background="@color/darkgray" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_suggest_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            linearAdapter="@{vm.adapter}" />
+    </LinearLayout>
+</layout>
