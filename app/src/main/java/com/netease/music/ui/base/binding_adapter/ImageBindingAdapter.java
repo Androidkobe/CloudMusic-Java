@@ -4,8 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
+import android.util.Base64;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
@@ -15,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.databinding.BindingAdapter;
+import androidx.room.util.StringUtil;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
@@ -73,6 +77,27 @@ public class ImageBindingAdapter {
                 .into(view);
 
     }
+
+    @BindingAdapter(value = {"imageBase64Data"},requireAll = false)
+    public static void displayImageForBase64Data(ImageView view,String base64Data){
+        Bitmap bitmap = covertBase64ToBitmap(base64Data);
+        if (bitmap!= null){
+            view.setImageBitmap(bitmap);
+        }
+    }
+
+    public static Bitmap covertBase64ToBitmap(String data){
+        if (TextUtils.isEmpty(data)){
+            return null;
+        }
+        String qrStr = data ;
+        if (data.contains("data:image/jpeg;base64,")) {
+            qrStr =  data.replace("data:image/jpeg;base64,", "");
+        }
+        byte[] qrByteArray = Base64.decode(qrStr, Base64.NO_WRAP);
+        return BitmapFactory.decodeByteArray(qrByteArray, 0, qrByteArray.length);
+    }
+
 
     public static File getImageFile(Context context, String url) throws ExecutionException, InterruptedException {
         return Glide.with(context)

@@ -29,6 +29,21 @@ public class LoginActivity extends BaseActivity {
 
     public class ClickProxy {
 
+        public void qrLogin(){
+            if (mLoginViewModel.argeeRule.get()) {
+                if (!NetworkUtils.isConnected()) {
+                    showShortToast(getBaseContext().getString(R.string.check_network));
+                    return;
+                }
+                startActivity(new Intent(LoginActivity.this, QrLoginActivity.class));
+            } else {
+                View viewById = getBinding().getRoot().findViewById(R.id.ll_agree_rule);
+                viewById.startAnimation(AnimUtil.shakeAnimation());
+                //提示用户点击同意条款
+                showShortToast(R.string.agree_rule);
+            }
+        }
+
         public void phoneLogin() {
             if (mLoginViewModel.argeeRule.get()) {
                 if (!NetworkUtils.isConnected()) {

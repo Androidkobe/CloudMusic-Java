@@ -169,7 +169,7 @@ public class PhoneLoginActivity extends BaseActivity {
         //返回按钮
         public void back() {
             //判断当前状态   输入手机号状态  输入密码状态  忘记密码状态 输入验证码状态
-            //PhoneLoginActivity.this.finish();
+            PhoneLoginActivity.this.finish();
             if (mPhoneLoginViewModel.showInputPhoneView.get()) {
                 //在输入手机号界面 直接结束Activity
                 finish();
