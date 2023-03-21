@@ -118,9 +118,9 @@ public class VideoFragment extends BaseFragment {
             //视频标题
             adapter.setText(R.id.tv_item_video_title, item.getData().getTitle());
             //视频作者 头像
-            manager.displayImageForCircle(adapter.getView(R.id.iv_item_video_creator_img), item.getData().getCreator().getAvatarurl());
+            manager.displayImageForCircle(adapter.getView(R.id.iv_item_video_creator_img), item.getData().getCreator() == null ? "" : item.getData().getCreator().getAvatarurl());
             //视频作者 用户名
-            adapter.setText(R.id.tv_item_video_creator_name, item.getData().getCreator().getNickname());
+            adapter.setText(R.id.tv_item_video_creator_name, item.getData().getCreator() == null ? "" : item.getData().getCreator().getNickname());
             //点赞次数
             adapter.setText(R.id.tv_item_video_praised_count, String.valueOf(item.getData().getPraisedcount()));
             //评论次数

@@ -63,9 +63,11 @@ import com.netease.lib_api.model.song.PlayListCommentBean;
 import com.netease.lib_api.model.song.SongDetailBean;
 import com.netease.lib_api.model.user.FollowBean;
 import com.netease.lib_api.model.user.LikeListBean;
-import com.netease.lib_api.model.user.Login2Bean;
+import com.netease.lib_api.model.user.QrLoginCookie;
+import com.netease.lib_api.model.user.QrLoginImgBean;
 import com.netease.lib_api.model.user.LoginBean;
 import com.netease.lib_api.model.user.MainEventBean;
+import com.netease.lib_api.model.user.QrLoginKeyBean;
 import com.netease.lib_api.model.user.UserDetailBean;
 import com.netease.lib_api.model.user.UserEventBean;
 import com.netease.lib_api.model.user.UserFollowedBean;
@@ -75,23 +77,27 @@ import com.netease.lib_api.model.user.UserPlaylistBean;
 import io.reactivex.Single;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiService {
 
-    String BASE_URL = "http://10.235.145.205:3000";
+    String BASE_URL = "http://192.168.31.238:3000";
 
     @GET("/")
     Single<ResponseBody> checkNetwork();
 
     @GET("login/qr/key")
-    Single<Login2Bean> createQrKey();
+    Single<QrLoginKeyBean> createQrKey();
 
     @GET("login/qr/create")
-    Single<Login2Bean> createQrImg(@Query("key") String key, @Query("qrimg") boolean qrimg);
+    Single<QrLoginImgBean> createQrImg(@Query("key") String key, @Query("qrimg") boolean qrimg, @Query("timestamp") long timestamp);
 
     @GET("/login/qr/check")
-    Single<LoginBean> createQrImgCheck(@Query("key") String key);
+    Single<QrLoginCookie> createQrImgCheck(@Query("key") String key);
+
+    @POST("/login/status")
+    Single<LoginBean> qrLogin(@Query("cookie") String cookie,@Query("timestamp") long timestamp);
 
     @GET("login/cellphone")
     Single<LoginBean> login(@Query("phone") String phone, @Query("password") String password);
@@ -404,7 +410,7 @@ public interface ApiService {
     Single<MvBean> getAllMv(@Query("area") String area, @Query("type") String type, @Query("order") String order, @Query("limit") int limit);
 
     @GET("msg/comments")
-    Single<PrivateCommentBean> getPrivateComment(@Query("uid") int userId);
+    Single<PrivateCommentBean> getPrivateComment(@Query("uid") long userId);
 
     @GET("msg/private")
     Single<PrivateMsgBean> getPrivateLetter(@Query("limit") int limit);

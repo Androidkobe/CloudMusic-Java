@@ -46,7 +46,7 @@ public class MusicCollectDialog extends CenterPopupView {
         super.onCreate();
         mRecyclerView = findViewById(R.id.recycler_playlist);
         //获取当前用户ID
-        final int userId = SharePreferenceUtil.getInstance(mContext).getUserId();
+        final long userId = SharePreferenceUtil.getInstance(mContext).getUserId();
         Disposable subscribe = ApiEngine.getInstance().getApiService().getUserPlaylist(userId)
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(userPlaylistBean -> {

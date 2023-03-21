@@ -45,7 +45,7 @@ public class DailyRecommendViewModel extends BaseLoadingViewModel {
         month.set(TimeUtil.getMonth(System.currentTimeMillis()));
         leftTitleAlpha.set(0);
         leftTitleVisiable.set(false);
-        backgroundImgUrl.set(GsonUtil.fromJSON(SharePreferenceUtil.getInstance(Utils.getApp()).getUserInfo(""), LoginBean.class).getProfile().getBackgroundUrl());
+        backgroundImgUrl.set(GsonUtil.fromJSON(SharePreferenceUtil.getInstance(Utils.getApp()).getUserInfo(""), LoginBean.class).data.getProfile().getBackgroundUrl());
         backgroundImgRadis.set(125);
 
     }

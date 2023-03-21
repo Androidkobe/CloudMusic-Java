@@ -49,7 +49,7 @@ public class NotificationFragment extends BaseFragment {
             type = NotificationType.getType(getArguments().getInt(NOTIFICATION_TYPE));
             switch (type) {
                 case COMMENT:
-                    mState.request.getPrivateCommentLiveData().observe(getViewLifecycleOwner(), comments -> {
+                    mState.request.getPrivateCommentLiveData().observe(this, comments -> {
                         mState.loadingVisible.set(false);
                         mState.adapter.set(new CommentAdapter(comments));
                     });
@@ -57,7 +57,7 @@ public class NotificationFragment extends BaseFragment {
                     mState.request.requestPirvateCommnet(SharePreferenceUtil.getInstance(getContext()).getUserId());
                     break;
                 case NOTICE:
-                    mState.request.getNoticeLiveData().observe(getViewLifecycleOwner(), data -> {
+                    mState.request.getNoticeLiveData().observe(this, data -> {
                         mState.loadingVisible.set(false);
                         mState.adapter.set(new PrivateNoticeAdapter(data));
                     });
@@ -65,7 +65,7 @@ public class NotificationFragment extends BaseFragment {
                     mState.request.requestNotice();
                     break;
                 case FORWARDS:
-                    mState.request.getForwardsMeLiveData().observe(getViewLifecycleOwner(), data -> {
+                    mState.request.getForwardsMeLiveData().observe(this, data -> {
                         mState.loadingVisible.set(false);
                         mState.adapter.set(new ForwardsMeAdapter(data));
                     });
@@ -73,7 +73,7 @@ public class NotificationFragment extends BaseFragment {
                     mState.request.requestForwardsMe();
                     break;
                 case PRIVATE_LETTER:
-                    mState.request.getPrivateLetterLiveData().observe(getViewLifecycleOwner(), data -> {
+                    mState.request.getPrivateLetterLiveData().observe(this, data -> {
                         mState.loadingVisible.set(false);
                         mState.adapter.set(new PrivateMsgAdapter(data));
                     });

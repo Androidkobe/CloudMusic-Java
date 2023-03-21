@@ -94,6 +94,9 @@ public class ImageBindingAdapter {
         if (data.contains("data:image/jpeg;base64,")) {
             qrStr =  data.replace("data:image/jpeg;base64,", "");
         }
+        if (data.contains("data:image/png;base64,")) {
+            qrStr =  data.replace("data:image/png;base64,", "");
+        }
         byte[] qrByteArray = Base64.decode(qrStr, Base64.NO_WRAP);
         return BitmapFactory.decodeByteArray(qrByteArray, 0, qrByteArray.length);
     }

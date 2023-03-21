@@ -75,11 +75,18 @@ public class SharePreferenceUtil {
 	 * 保存用户的信息以及电话号码（因为bean里的电话号码要处理字符串，所以这里直接暴力传比较高效）
 	 */
 	public void saveUserInfo(LoginBean bean, String phoneNumber) {
-		if (bean.getBindings() != null && bean.getBindings().size() > 1) {
-			saveAuthToken(bean.getBindings().get(1).getTokenJsonStr());
+		if (bean.data.getBindings() != null && bean.data.getBindings().size() > 1) {
+			saveAuthToken(bean.data.getBindings().get(1).getTokenJsonStr());
 		}
-		saveUserId(String.valueOf(bean.getProfile().getUserId()));
+		saveUserId(String.valueOf(bean.data.getProfile().getUserId()));
 		saveAccountNum(phoneNumber);
+		saveString(Constants.SpKey.USER_INFO, GsonUtil.toJson(bean));
+	}
+	public void saveUserInfo(LoginBean bean) {
+		if (bean.data.getBindings() != null && bean.data.getBindings().size() > 1) {
+			saveAuthToken(bean.data.getBindings().get(1).getTokenJsonStr());
+		}
+		saveUserId(String.valueOf(bean.data.getProfile().getUserId()));
 		saveString(Constants.SpKey.USER_INFO, GsonUtil.toJson(bean));
 	}
 
@@ -101,13 +108,13 @@ public class SharePreferenceUtil {
 	/**
 	 * 获取当前登录用户ID
 	 */
-	public int getUserId() {
+	public long getUserId() {
 		String userInfo = getString(Constants.SpKey.USER_INFO, "");
 		if (TextUtils.isEmpty(userInfo)) {
 			return 0;
 		}
 		LoginBean loginBean = GsonUtil.fromJSON(userInfo, LoginBean.class);
-		return loginBean.getProfile().getUserId();
+		return loginBean.data.getProfile().getUserId();
 	}
 
 

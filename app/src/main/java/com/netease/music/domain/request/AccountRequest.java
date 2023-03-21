@@ -59,7 +59,7 @@ public class AccountRequest extends BaseRequest implements DefaultLifecycleObser
 
                     @Override
                     public void onSuccess(@NotNull LoginBean result) {
-                        ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.getCode()), result.getCode() == 200);
+                        ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.data.getCode()), result.data.getCode() == 200);
                         loginData.postValue(new DataResult<>(result, responseStatus));
                     }
 
@@ -86,14 +86,14 @@ public class AccountRequest extends BaseRequest implements DefaultLifecycleObser
 
                     @Override
                     public void onSuccess(@NotNull LoginBean loginBean) {
-                        ResponseStatus responseStatus = new ResponseStatus(String.valueOf(loginBean.getCode()), loginBean.getCode() == 200);
+                        ResponseStatus responseStatus = new ResponseStatus(String.valueOf(loginBean.data.getCode()), loginBean.data.getCode() == 200);
                         loginData.postValue(new DataResult<>(loginBean, responseStatus));
                     }
 
                     @Override
                     protected void onFailed(ExceptionHandle.ResponseThrowable result) {
                         ResponseStatus responseStatus = new ResponseStatus(String.valueOf(result.code), false);
-                        loginData.postValue(new DataResult<>(new LoginBean(result.message), responseStatus));
+                        loginData.postValue(new DataResult<>(new LoginBean(new LoginBean.Data(result.message)), responseStatus));
                     }
                 });
 

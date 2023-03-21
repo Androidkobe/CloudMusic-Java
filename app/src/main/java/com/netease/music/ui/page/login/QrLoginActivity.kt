@@ -1,5 +1,6 @@
 package com.netease.music.ui.page.login
 
+import android.os.Bundle
 import com.kunminx.architecture.ui.page.BaseActivity
 import com.kunminx.architecture.ui.page.DataBindingConfig
 import com.netease.music.BR
@@ -17,6 +18,11 @@ class QrLoginActivity : BaseActivity() {
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.delegate_er_login, BR.vm, mQrLoginViewModel!!).
         addBindingParam(BR.proxy,Proxy())
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mQrLoginViewModel?.qrLogin(this)
     }
 
     inner class  Proxy{

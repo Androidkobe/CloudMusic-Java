@@ -35,7 +35,7 @@ public class MineFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         //最近播放的音乐数量  实时更新
-        AppDatabase.getInstance(getContext()).getLatestSongDao().getRecentSongSize().observe(getViewLifecycleOwner(), size -> {
+        AppDatabase.getInstance(getContext()).getLatestSongDao().getRecentSongSize().observe(this, size -> {
             mMineViewModel.recentPlaySongSize.set(size);
         });
 
@@ -47,7 +47,7 @@ public class MineFragment extends BaseFragment {
         // Activity 则不用改变。
 
         //用户歌单
-        mMineViewModel.mineRequest.getUserPlaylistLiveData().observe(getViewLifecycleOwner(), playlistBeans -> {
+        mMineViewModel.mineRequest.getUserPlaylistLiveData().observe(this, playlistBeans -> {
 
             mMineViewModel.playlistAdapter.set(new MultiplePlaylistAdapter(getContext(), playlistBeans));
             mMineViewModel.loadingVisible.set(false);
@@ -59,7 +59,7 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        mMineViewModel.mineRequest.requestUserPlaylist(mMineViewModel.user.get().getProfile().getUserId());
+        mMineViewModel.mineRequest.requestUserPlaylist(mMineViewModel.user.get().data.getProfile().getUserId());
     }
 
 

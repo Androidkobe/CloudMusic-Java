@@ -36,11 +36,11 @@ public class VideoTabFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
 
         //标题
-        mViewModel.request.getTitleLiveData().observe(getViewLifecycleOwner(), title -> {
+        mViewModel.request.getTitleLiveData().observe(this, title -> {
             mViewModel.indicatorTitle.set(title);
         });
         //分页ID
-        mViewModel.request.getVideoTabIdLiveData().observe(getViewLifecycleOwner(), idArray -> {
+        mViewModel.request.getVideoTabIdLiveData().observe(this, idArray -> {
             VideoTabAdapter mAdapter = new VideoTabAdapter(idArray, getChildFragmentManager());
             mViewModel.adapter.set(mAdapter);
         });

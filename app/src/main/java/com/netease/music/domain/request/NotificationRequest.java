@@ -52,7 +52,7 @@ public class NotificationRequest extends BaseRequest {
     }
 
     // 请求评论
-    public void requestPirvateCommnet(int uid) {
+    public void requestPirvateCommnet(long uid) {
         ApiEngine.getInstance().getApiService().getPrivateComment(uid)
                 .compose(ApiEngine.getInstance().applySchedulers())
                 .subscribe(privateCommentBean -> {

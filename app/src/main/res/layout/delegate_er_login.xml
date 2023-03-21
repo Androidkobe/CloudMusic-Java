@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:bind="http://schemas.android.com/tools">
     <data>
         <variable
             name="vm"
@@ -17,30 +18,24 @@
         android:orientation="vertical"
         >
 
-        <LinearLayout
+        <include
+            layout="@layout/common_back_title_layout"
+            bind:vm = "@{vm}"
+            bind:proxy = "@{proxy}"/>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/img_tab_back"
-                onClickWithDebouncing="@{() -> proxy.back()}"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_left_arrow_black" />
+                android:id="@+id/im_qr_show"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerInParent="true"
+                imageBase64Data="@{vm.mQrStringData}"
+                />
 
-            <TextView
-                android:id="@+id/tv_login_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="7"
-                android:gravity="center_vertical"
-                android:text="@{vm.title}"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+        </RelativeLayout>
 
-        </LinearLayout>
     </LinearLayout>
 </layout>
