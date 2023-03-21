@@ -15,6 +15,13 @@ class QrLoginActivity : BaseActivity() {
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
-        return DataBindingConfig(R.layout.delegate_er_login, BR.vm, mQrLoginViewModel!!)
+        return DataBindingConfig(R.layout.delegate_er_login, BR.vm, mQrLoginViewModel!!).
+        addBindingParam(BR.proxy,Proxy())
+    }
+
+    inner class  Proxy{
+        fun back(){
+            finish()
+        }
     }
 }
